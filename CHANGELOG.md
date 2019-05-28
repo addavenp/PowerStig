@@ -2,9 +2,38 @@
 
 ## Unreleased
 
-## 3.0.1
+## 3.2.0
+
+* Added support for IIS 8.5 Server STIG, Version 1, Release 7 [#399](https://github.com/Microsoft/PowerStig/issues/399)
+* Fixed [#373](https://github.com/Microsoft/PowerStig/issues/373): Registry resource does not handle null values for ValueData contained in Processed STIGs
+* Fixed [#376](https://github.com/Microsoft/PowerStig/issues/376): SQL STIG Rules V-41021 (Instance STIG) and V-41402 (Database STIG) fail to apply when applying to a SQL instance that is NOT name the default (MSSQLSERVER).
+* Fixed [#377](https://github.com/Microsoft/PowerStig/issues/377): SQL Instance Rule V-40936 fails when Set-TargertResource is ran
+* Fixed [#280](https://github.com/Microsoft/PowerStig/issues/280): HKEY_CURRENT_USER is not needed with the cAdministrativeTemplateSetting composite resource. (Regression Issue)
+* Fixed [#385](https://github.com/Microsoft/PowerStig/issues/385): IIS Server STIG V-76681 does not parse correctly
+* Added support for Office 2016 STIGs [#370](https://github.com/Microsoft/PowerStig/issues/370)
+* Added support to Automate Application Pool Recycling for IisSite_8.5 [#378](https://github.com/Microsoft/PowerStig/issues/378)
+* Added support for Windows Server 2012R2 DC V2R16 [#398](https://github.com/Microsoft/PowerStig/issues/398)
+* Added support for update Windows Server 2012 MS STIG v2r15 [#395](https://github.com/Microsoft/PowerStig/issues/395)
+* Added support for Firefox STIG v4r25 [#389](https://github.com/Microsoft/PowerStig/issues/389)
+* Added entry in log file for IISSite 1.7 so rule v-76819 parses as an xWebConfigurationProperty [#407](https://github.com/microsoft/PowerStig/issues/407)
+* Added IISSite v1.7 [#400](https://github.com/microsoft/PowerStig/issues/400)
+* Fixed [#403](https://github.com/microsoft/PowerStig/issues/403): DotNet STIG V1R7 update
+
+## 3.1.0
 
 UPDATES
+
+* Removed duplicate code from rule class constructors
+* Migrated from Get-WmiObject to Get-CimInstance to support PowerShell Core
+* Migrated to PSDscResources [#345](https://github.com/Microsoft/PowerStig/issues/345)
+* Migrated to ComputerManagementDsc [#342](https://github.com/Microsoft/PowerStig/issues/342)
+* Fixed [#358](https://github.com/Microsoft/PowerStig/issues/358): Update PowerSTIG Duplicate Rule handling and capability
+
+Added the following STIG
+
+* Windows Defender V1R4 [#344](https://github.com/Microsoft/PowerStig/issues/344)
+
+## 3.0.1
 
 * Fixed [#350](https://github.com/Microsoft/PowerStig/issues/350): Updates to fix Skip rules not working correctly
 * Fixed [#348](https://github.com/Microsoft/PowerStig/issues/348): Update to DnsServer Schema to correct typo.

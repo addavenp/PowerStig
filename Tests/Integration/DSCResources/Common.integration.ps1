@@ -40,7 +40,7 @@ Describe ($title + " $($stig.StigVersion) mof output") {
         Context $ruleName {
             $hasAllRules = $true
             $ruleList = @($powerstigXml.DISASTIG.$ruleName.Rule |
-                    Where-Object {$PSItem.conversionstatus -eq 'pass' -and $PSItem.dscResource -ne 'ActiveDirectoryAuditRuleEntry'})
+                    Where-Object {$PSItem.conversionstatus -eq 'pass' -and $PSItem.dscResource -ne 'ActiveDirectoryAuditRuleEntry' -and $PSItem.DuplicateOf -eq ''})
 
             $dscMof = $instances |
                 Where-Object {$PSItem.ResourceID -match (Get-ResourceMatchStatement -RuleName $ruleName)}
@@ -56,6 +56,18 @@ Describe ($title + " $($stig.StigVersion) mof output") {
                 {
                     Write-Warning -Message "Missing $ruleName $($rule.id)"
                     $hasAllRules = $false
+                }
+            }
+
+            foreach ($mofEntry in $dscMof)
+            {
+                if ($mofEntry.ResourceID -match "cAdministrativeTemplateSetting")
+                {
+                    It "Should not contain the Hive in Key Path for $($mofEntry.ResourceID)" {
+                        $regexPattern = 'HKEY_CURRENT_USER|HKEY_CLASSES_ROOT|HKEY_LOCAL_MACHINE|HKEY_USERS|HKEY_CURRENT_CONFIG'
+                        $regKeyResult = $mofEntry.KeyValueName | Select-String -Pattern $regexPattern -AllMatches
+                        $regKeyResult.Matches.Count | Should -Be 0
+                    }
                 }
             }
 
